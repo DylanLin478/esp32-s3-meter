@@ -80,3 +80,12 @@ This is a low-voltage learning prototype, not a certified multimeter. The draft 
 - [Espressif self-powered USB guidance](https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_device_self_power.html)
 - [TI TPS62130 buck converter candidate](https://www.ti.com/product/TPS62130)
 - [TI SN74AHCT245 LCD interface buffer](https://www.ti.com/lit/ds/symlink/sn74ahct245.pdf)
+## Power supply revision: LDO to dual buck converters
+![Initial schematic with LDO power supply](Schematic-v1-LDO.png)
+*Earlier schematic revision—before implementing the proposed battery power system.*
+The original design uses a TLV1117LV33 linear regulator to produce 3.3 V from a 5 V supply. This regulator can operate from 5 V with appropriate supporting components and thermal design, but its maximum recommended input is 5.5 V. It cannot connect directly to the proposed 7.4 V battery pack, which reaches 8.4 V when fully charged.
+The planned revision uses a protected 2S battery pack and two buck converters:
+- **5 V output:** LCD and level-shifting circuitry.
+- **3.3 V output:** ESP32-S3 and associated circuitry.
+This change is intended to reduce power lost as heat compared with linear regulation. Component selection, schematic updates, and measurements of efficiency, temperature, and battery runtime are still pending.
+Reference: [TI TLV1117LV datasheet](https://www.ti.com/lit/ds/symlink/tlv1117lv.pdf).
