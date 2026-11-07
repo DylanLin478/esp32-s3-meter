@@ -1,3 +1,0 @@
-## Microcontroller
-![](Microcontroller.png)
-
